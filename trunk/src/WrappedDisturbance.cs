@@ -9,7 +9,7 @@ namespace Landis.Library.LeafBiomassCohorts
     /// A wrapped age-cohort disturbance so it works with biomass cohorts.
     /// </summary>
     public class WrappedDisturbance
-        : IDisturbance
+        : IDisturbance, Landis.Library.BiomassCohorts.IDisturbance
     {
         private AgeOnlyCohorts.ICohortDisturbance ageCohortDisturbance;
 
@@ -55,6 +55,12 @@ namespace Landis.Library.LeafBiomassCohorts
             
             //else
             return damage;
+        }
+
+        public int ReduceOrKillMarkedCohort(Landis.Library.BiomassCohorts.ICohort cohort)
+        {
+
+            return cohort.Biomass;
         }
     }
 }

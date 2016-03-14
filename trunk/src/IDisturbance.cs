@@ -7,26 +7,28 @@ namespace Landis.Library.LeafBiomassCohorts
     /// <summary>
     /// A disturbance that damages cohorts thereby reducing their biomass.
     /// </summary>
-    public interface IDisturbance
+    public interface IDisturbance : Landis.Library.BiomassCohorts.IDisturbance
     {
         /// <summary>
         /// The disturbance's type.
         /// </summary>
+        /*
         ExtensionType Type
         {
             get;
         }
-
+        */
         //---------------------------------------------------------------------
 
         /// <summary>
         /// The current site that the disturbance is damaging.
         /// </summary>
+        /*
         ActiveSite CurrentSite
         {
             get;
         }
-
+        */
         //---------------------------------------------------------------------
 
         /// <summary>

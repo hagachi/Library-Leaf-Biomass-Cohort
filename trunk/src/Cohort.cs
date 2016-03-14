@@ -1,7 +1,6 @@
 //  Copyright 2005-2010 Portland State University, University of Wisconsin
 //  Authors:  Robert M. Scheller, James B. Domingo
 
-using Edu.Wisc.Forest.Flel.Util;
 
 using Landis.Core;
 using Landis.SpatialModeling;
@@ -13,6 +12,7 @@ namespace Landis.Library.LeafBiomassCohorts
     /// </summary>
     public class Cohort
         : ICohort
+        
     {
         private ISpecies species;
         private CohortData data;
@@ -61,7 +61,11 @@ namespace Landis.Library.LeafBiomassCohorts
             }
         }
         //---------------------------------------------------------------------
-
+        public int ComputeNonWoodyBiomass(ActiveSite site)
+        {
+            return (int)(WoodBiomass);
+        }
+       
         /// <summary>
         /// The cohort's age and biomass data.
         /// </summary>
@@ -96,16 +100,6 @@ namespace Landis.Library.LeafBiomassCohorts
         }
 
         //---------------------------------------------------------------------
-        /*
-        public Cohort(ISpecies species,
-                      ushort age)
-        {
-            this.species = species;
-            this.data.Age = age;
-        }
-        */
-        //---------------------------------------------------------------------
-
         /// <summary>
         /// Increments the cohort's age by one year.
         /// </summary>
