@@ -392,8 +392,9 @@ namespace Landis.Library.LeafBiomassCohorts
                     Cohort.KilledByAgeOnlyDisturbance(disturbance, cohort,
                         disturbance.CurrentSite,
                         disturbance.Type);
-
-
+                    
+                    Landis.Library.BiomassCohorts.Cohort.KilledByAgeOnlyDisturbance(disturbance, cohort, disturbance.CurrentSite, disturbance.Type);
+                    
                     RemoveCohort(i, cohort, disturbance.CurrentSite,
                                  disturbance.Type);
                     cohort = null;
@@ -407,42 +408,40 @@ namespace Landis.Library.LeafBiomassCohorts
         //--------------------------------------------------------------------- 
         public int MarkCohorts(Landis.Library.BiomassCohorts.IDisturbance disturbance)
         {
-            isSpeciesCohortDamaged.SetAllFalse(Count);
-
             //  Go backwards through list of cohort data, so the removal of an
             //  item doesn't mess up the loop.
             isMaturePresent = false;
             int totalReduction = 0;
 
-            for (int i = cohortData.Count - 1; i >= 0; i--) {
-                if (isSpeciesCohortDamaged[i]) {
-                    Cohort cohort = new Cohort(species, cohortData[i]);
-                    int reduction = disturbance.ReduceOrKillMarkedCohort(cohort);
-                    if (reduction > 0)
+            for (int i = cohortData.Count - 1; i >= 0; i--)
+            {
+                Cohort cohort = new Cohort(species, cohortData[i]);
+                int reduction = disturbance.ReduceOrKillMarkedCohort(cohort);
+                if (reduction > 0)
+                {
+                    totalReduction += reduction;
+                    if (reduction < cohort.Biomass)
                     {
-                        totalReduction += reduction;
-                        if (reduction < cohort.Biomass)
-                        {
-                            float fRed = reduction / cohort.Biomass;
-                            float deltaWood = (-1) * fRed * (float)cohort.Data.WoodBiomass;
-                            cohort.ChangeWoodBiomass(deltaWood);
-                            float deltaLeaf = (-1) * fRed * (float)cohort.Data.LeafBiomass;
-                            cohort.ChangeLeafBiomass(deltaLeaf);
-                        }
-                        else
-                        {
-                            Cohort.KilledByAgeOnlyDisturbance(disturbance, cohort,
-                                    disturbance.CurrentSite,
-                                     disturbance.Type);
-                            RemoveCohort(i, cohort, disturbance.CurrentSite,
-                                 disturbance.Type);
-                            cohort = null;
-                        }
+                        float fRed = reduction / cohort.Biomass;
+                        float deltaWood = (-1) * fRed * (float)cohort.Data.WoodBiomass;
+                        cohort.ChangeWoodBiomass(deltaWood);
+                        float deltaLeaf = (-1) * fRed * (float)cohort.Data.LeafBiomass;
+                        cohort.ChangeLeafBiomass(deltaLeaf);
+                        if (cohortData[i].Age >= species.Maturity)
+                            isMaturePresent = true;
                     }
-                    
+                    else
+                    {
+                        RemoveCohort(i, cohort, disturbance.CurrentSite,
+                             disturbance.Type);
+                        cohort = null;
+                    }
                 }
-                else if (cohortData[i].Age >= species.Maturity)
-                    isMaturePresent = true;
+                else
+                {
+                    if (cohortData[i].Age >= species.Maturity)
+                        isMaturePresent = true;
+                }
             }
             return totalReduction;
         }
