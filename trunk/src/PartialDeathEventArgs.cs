@@ -8,12 +8,13 @@ namespace Landis.Library.LeafBiomassCohorts
     /// <summary>
     /// Information about a cohort's death.
     /// </summary>
-    public class DeathEventArgs
+    public class PartialDeathEventArgs
     {
 
         private ICohort cohort;
         private ActiveSite site;
         private ExtensionType disturbanceType;
+        private double reduction;
 
         //---------------------------------------------------------------------
 
@@ -60,15 +61,29 @@ namespace Landis.Library.LeafBiomassCohorts
         //---------------------------------------------------------------------
 
         /// <summary>
+        /// The fraction of the cohort killed.
+        /// </summary>
+        public double Reduction
+        {
+            get
+            {
+                return reduction;
+            }
+        }
+        //---------------------------------------------------------------------
+
+        /// <summary>
         /// Initializes a new instance.
         /// </summary>
-        public DeathEventArgs(ICohort cohort,
+        public PartialDeathEventArgs(ICohort cohort,
                               ActiveSite site,
-                              ExtensionType disturbanceType)
+                              ExtensionType disturbanceType,
+                                double reduction)
         {
             this.cohort = cohort;
             this.site = site;
             this.disturbanceType = disturbanceType;
+            this.reduction = reduction;
         }
     }
 }

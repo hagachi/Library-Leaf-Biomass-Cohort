@@ -4,6 +4,7 @@
 
 using Landis.Core;
 using Landis.SpatialModeling;
+using System;
 
 namespace Landis.Library.LeafBiomassCohorts
 {
@@ -135,8 +136,26 @@ namespace Landis.Library.LeafBiomassCohorts
         /// Occurs when a cohort dies either due to senescence or biomass
         /// disturbances.
         /// </summary>
-        public static event DeathEventHandler<DeathEventArgs> DeathEvent;
+        //public static event DeathEventHandler<DeathEventArgs> DeathEvent;
+        public static event Landis.Library.BiomassCohorts.PartialDeathEventHandler<Landis.Library.BiomassCohorts.PartialDeathEventArgs> PartialDeathEvent;
+        public static event Landis.Library.BiomassCohorts.DeathEventHandler<Landis.Library.BiomassCohorts.DeathEventArgs> DeathEvent;
+        public static event Landis.Library.BiomassCohorts.DeathEventHandler<Landis.Library.BiomassCohorts.DeathEventArgs> AgeOnlyDeathEvent;
 
+        //---------------------------------------------------------------------
+
+        /// <summary>
+        /// Scheller TESTING 12/2016
+        /// Raises a Cohort.DeathEvent if partial mortality.
+        /// </summary>
+        public static void PartialMortality(object sender,
+                                ICohort cohort,
+                                ActiveSite site,
+                                ExtensionType disturbanceType,
+                                float reduction)
+        {
+            if (PartialDeathEvent != null)
+                PartialDeathEvent(sender, new Landis.Library.BiomassCohorts.PartialDeathEventArgs(cohort, site, disturbanceType, reduction));
+        }
         //---------------------------------------------------------------------
 
         /// <summary>
@@ -148,7 +167,7 @@ namespace Landis.Library.LeafBiomassCohorts
                                 ExtensionType disturbanceType)
         {
             if (DeathEvent != null)
-                DeathEvent(sender, new DeathEventArgs(cohort, site, disturbanceType));
+                DeathEvent(sender, new Landis.Library.BiomassCohorts.DeathEventArgs(cohort, site, disturbanceType));
         }
 
         //---------------------------------------------------------------------
@@ -156,7 +175,7 @@ namespace Landis.Library.LeafBiomassCohorts
         /// <summary>
         /// Occurs when a cohort is killed by an age-only disturbance.
         /// </summary>
-        public static event DeathEventHandler<DeathEventArgs> AgeOnlyDeathEvent;
+        //public static event DeathEventHandler<DeathEventArgs> AgeOnlyDeathEvent;
 
         //---------------------------------------------------------------------
 
@@ -169,7 +188,7 @@ namespace Landis.Library.LeafBiomassCohorts
                                                       ExtensionType disturbanceType)
         {
             if (AgeOnlyDeathEvent != null)
-                AgeOnlyDeathEvent(sender, new DeathEventArgs(cohort, site, disturbanceType));
+                AgeOnlyDeathEvent(sender, new Landis.Library.BiomassCohorts.DeathEventArgs(cohort, site, disturbanceType));
         }
     }
 }

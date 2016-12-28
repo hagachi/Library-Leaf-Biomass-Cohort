@@ -6,6 +6,7 @@ using System.Reflection;
 using Landis.Core;
 using Landis.SpatialModeling;
 using log4net;
+using System;
 
 namespace Landis.Library.LeafBiomassCohorts
 {
@@ -294,6 +295,14 @@ namespace Landis.Library.LeafBiomassCohorts
             Cohort.Died(this, cohort, site, disturbanceType);
         }
 
+        private void ReduceCohort(int index,
+                                  ICohort cohort,
+                                  ActiveSite site,
+                                  ExtensionType disturbanceType, float reduction)
+        {
+            //cohortData.RemoveAt(index);
+            Cohort.PartialMortality(this, cohort, site, disturbanceType, reduction);
+        }
         //---------------------------------------------------------------------
 
         /// <summary>
@@ -332,6 +341,7 @@ namespace Landis.Library.LeafBiomassCohorts
 
                 Cohort cohort = new Cohort(species, cohortData[i]);
                 float[] reduction = disturbance.ReduceOrKillMarkedCohort(cohort);
+                float fRed = ((reduction[0] + reduction[1])/ (float) cohort.Biomass);
 
                 if (reduction[0] + reduction[1] > 0) {
                     totalReduction += (int) (reduction[0] + reduction[1]);
@@ -349,8 +359,12 @@ namespace Landis.Library.LeafBiomassCohorts
                         cohort = null;
                     }
                 }
-                if (cohort != null && cohort.Age >= species.Maturity)
-                    isMaturePresent = true;
+                if (cohort != null)
+                {
+                    ReduceCohort(i, cohort, disturbance.CurrentSite, disturbance.Type, fRed); //RMS 12/2016
+                    if(cohort.Age >= species.Maturity)
+                        isMaturePresent = true;
+                }
             }
             return totalReduction;
         }
@@ -389,9 +403,9 @@ namespace Landis.Library.LeafBiomassCohorts
                     Cohort cohort = new Cohort(species, cohortData[i]);
                     totalReduction += (int) (cohort.WoodBiomass + cohort.LeafBiomass);
 
-                    Cohort.KilledByAgeOnlyDisturbance(disturbance, cohort,
-                        disturbance.CurrentSite,
-                        disturbance.Type);
+                    //Cohort.KilledByAgeOnlyDisturbance(disturbance, cohort,
+                    //    disturbance.CurrentSite,
+                    //    disturbance.Type);
                     
                     Landis.Library.BiomassCohorts.Cohort.KilledByAgeOnlyDisturbance(disturbance, cohort, disturbance.CurrentSite, disturbance.Type);
                     
@@ -422,16 +436,20 @@ namespace Landis.Library.LeafBiomassCohorts
                     totalReduction += reduction;
                     if (reduction < cohort.Biomass)
                     {
-                        float fRed = reduction / cohort.Biomass;
+                        float fRed = (float) reduction / (float) cohort.Biomass;
                         float deltaWood = (-1) * fRed * (float)cohort.Data.WoodBiomass;
                         cohort.ChangeWoodBiomass(deltaWood);
                         float deltaLeaf = (-1) * fRed * (float)cohort.Data.LeafBiomass;
                         cohort.ChangeLeafBiomass(deltaLeaf);
+                        //Console.WriteLine("  Partial mortality: {0}, {1} yrs, {2} Mg/ha", cohort.Species.Name, cohort.Age, cohort.Biomass);
+
                         if (cohortData[i].Age >= species.Maturity)
                             isMaturePresent = true;
+                        ReduceCohort(i, cohort, disturbance.CurrentSite, disturbance.Type, fRed);  //RMS 12/2016
                     }
                     else
                     {
+                        //Console.WriteLine("  Total mortality: {0}, {1} yrs, {2} Mg/ha", cohort.Species.Name, cohort.Age, cohort.Biomass);
                         RemoveCohort(i, cohort, disturbance.CurrentSite,
                              disturbance.Type);
                         cohort = null;
