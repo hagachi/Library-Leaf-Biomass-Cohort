@@ -43,8 +43,8 @@
     <Reference Include="Landis.Library.AgeOnlyCohorts">
       <HintPath>..\lib\Landis.Library.AgeOnlyCohorts.dll</HintPath>
     </Reference>
-    <Reference Include="Landis.Library.BiomassCohorts">
-      <HintPath>..\lib\Landis.Library.BiomassCohorts.dll</HintPath>
+    <Reference Include="Landis.Library.BiomassCohorts-v2">
+      <HintPath>..\..\..\Library-Biomass-Cohort\biomass-cohort-library\trunk\src\bin\Debug\Landis.Library.BiomassCohorts-v2.dll</HintPath>
     </Reference>
     <Reference Include="Landis.Library.Cohorts">
       <HintPath>..\lib\Landis.Library.Cohorts.dll</HintPath>
@@ -90,8 +90,7 @@
     </PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PreBuildEvent>
-    </PreBuildEvent>
+    <PreBuildEvent>call $(SolutionDir)\install-libs.cmd</PreBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
