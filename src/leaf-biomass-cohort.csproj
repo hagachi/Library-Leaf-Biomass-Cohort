@@ -9,7 +9,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>leaf_biomass_cohort</RootNamespace>
-    <AssemblyName>Landis.Library.LeafBiomassCohorts</AssemblyName>
+    <AssemblyName>Landis.Library.LeafBiomassCohorts-v1.0.1</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -40,7 +40,7 @@
     </Reference>
     <Reference Include="Landis.Library.AgeOnlyCohorts">
     </Reference>
-    <Reference Include="Landis.Library.BiomassCohorts-v2">
+    <Reference Include="Landis.Library.BiomassCohorts-v2.0.1">
     </Reference>
     <Reference Include="Landis.Library.Cohorts">
     </Reference>
@@ -81,11 +81,13 @@
   <PropertyGroup>
     <PostBuildEvent>
     </PostBuildEvent>
-  </PropertyGroup>
+</PropertyGroup>
+ 
   <PropertyGroup>
     <PreBuildEvent>call $(SolutionDir)\install-libs.cmd</PreBuildEvent>
-  </PropertyGroup>
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+</PropertyGroup>
+<!--
+	 To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>
