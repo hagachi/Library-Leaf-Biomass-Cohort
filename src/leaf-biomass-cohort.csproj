@@ -9,7 +9,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>leaf_biomass_cohort</RootNamespace>
-    <AssemblyName>Landis.Library.LeafBiomassCohorts-v1.0.1</AssemblyName>
+    <AssemblyName>Landis.Library.LeafBiomassCohorts</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -40,9 +40,9 @@
     </Reference>
     <Reference Include="Landis.Library.AgeOnlyCohorts">
     </Reference>
-    <Reference Include="Landis.Library.BiomassCohorts-v2, Version=1.3.6473.19713, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Landis.Library.BiomassCohorts-v2, Version=1.3.6650.22592, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Extension-SCRAPPLE\src\bin\debug\Landis.Library.BiomassCohorts-v2.dll</HintPath>
+      <HintPath>bin\Debug\Landis.Library.BiomassCohorts-v2.dll</HintPath>
     </Reference>
     <Reference Include="Landis.Library.Cohorts">
     </Reference>
@@ -75,6 +75,7 @@
     <Compile Include="ISiteCohorts.cs" />
     <Compile Include="ISpeciesCohorts.cs" />
     <Compile Include="OldToYoungIterator.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SiteCohorts.cs" />
     <Compile Include="SpeciesCohorts.cs" />
     <Compile Include="WrappedDisturbance.cs" />
@@ -84,8 +85,9 @@
     <PostBuildEvent>
     </PostBuildEvent>
   </PropertyGroup>
-<PropertyGroup>
-    <PreBuildEvent>call $(SolutionDir)\install-libs.cmd</PreBuildEvent>
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
   </PropertyGroup>
   <!--
 	 To modify your build process, add your task inside one of the targets below and uncomment it. 
