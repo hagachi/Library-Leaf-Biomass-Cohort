@@ -341,7 +341,6 @@ namespace Landis.Library.LeafBiomassCohorts
 
                 Cohort cohort = new Cohort(species, cohortData[i]);
                 float[] reduction = disturbance.ReduceOrKillMarkedCohort(cohort);
-                //int reduction = disturbance.ReduceOrKillMarkedCohort(cohort);
                 totalReduction += (int)(reduction[0] + reduction[1]);
                 float fRed = ((float) totalReduction / (float) cohort.Biomass);
 
@@ -350,15 +349,19 @@ namespace Landis.Library.LeafBiomassCohorts
                     if (totalReduction < cohort.Biomass)
                     {
                         //Console.WriteLine("  LeafBiomass DamageBySpecies Partial mortality: {0}, {1} yrs, {2} Mg/ha, red={3}", cohort.Species.Name, cohort.Age, cohort.Biomass, totalReduction);
-                        ReduceCohort(i, cohort, disturbance.CurrentSite, disturbance.Type, fRed); //RMS 12/2016
+                        ReduceCohort(i, cohort, disturbance.CurrentSite, disturbance.Type, fRed);
+
+                        float deltaWood = fRed * (float)cohort.Data.WoodBiomass;
+                        float deltaLeaf = fRed * (float)cohort.Data.LeafBiomass;
+
                         if (reduction[1] < cohort.LeafBiomass)
                         {
-                            cohort.ChangeLeafBiomass(-reduction[1]);
+                            cohort.ChangeLeafBiomass(-deltaLeaf);
                             cohortData[i] = cohort.Data;
                         }
                         if (reduction[0] < cohort.WoodBiomass)
                         {
-                            cohort.ChangeWoodBiomass(-reduction[0]);
+                            cohort.ChangeWoodBiomass(-deltaWood);
                             cohortData[i] = cohort.Data;
                         }
                     }
@@ -448,12 +451,10 @@ namespace Landis.Library.LeafBiomassCohorts
 
                         float fRed = (float)reduction / (float)cohort.Biomass;
                         //Console.WriteLine("  LeafBiomass MarkCohorts Partial mortality BEFORE: {0}, {1} yrs, {2} Mg/ha, reduction={3}", cohort.Species.Name, cohort.Age, cohort.Biomass, reduction);
-                        ReduceCohort(i, cohort, disturbance.CurrentSite, disturbance.Type, fRed);  //RMS 12/2016
+                        ReduceCohort(i, cohort, disturbance.CurrentSite, disturbance.Type, fRed);  
                         
                         float deltaWood = fRed * (float)cohort.Data.WoodBiomass;
-                        //cohort.ChangeWoodBiomass(deltaWood);
                         float deltaLeaf = fRed * (float)cohort.Data.LeafBiomass;
-                        //cohort.ChangeLeafBiomass(deltaLeaf);
 
                         if (deltaLeaf < cohort.LeafBiomass)
                         {
