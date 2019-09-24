@@ -22,7 +22,7 @@
     <PackageTags>LANDIS-II;Landis;Library;Biomass;Cohort</PackageTags>
     <Description>Leaf Biomass Cohort Library for LANDIS-II</Description>
     <PackageReleaseNotes>.NET Standard 2.0 update.</PackageReleaseNotes>
-    <FileVersion>7.0</FileVersion>
+    <FileVersion>2.0</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
