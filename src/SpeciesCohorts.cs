@@ -255,7 +255,11 @@ namespace Landis.Library.LeafBiomassCohorts
                 return index;
             }
 
-            if(annualTimestep) 
+            // Chihiro 2020.10.31
+            // Case 1 for implementing grass species in LANDIS:
+            //     "grass species age is constant"
+            //if (annualTimestep) 
+            if (annualTimestep && species.Name != "sasa_spp")
                 cohort.IncrementAge();
 
             float[] biomassChange = Cohorts.BiomassCalculator.ComputeChange(cohort, site);
