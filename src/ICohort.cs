@@ -27,6 +27,15 @@ namespace Landis.Library.LeafBiomassCohorts
             get;
         }
 
+        /// <summary>
+        /// The cohort's established location.
+        /// </summary>
+        // 2020.10.30 Chihiro
+        string EstablishedLoc
+        {
+            get;
+        }
+
 
 
     }

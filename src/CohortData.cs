@@ -26,30 +26,36 @@ namespace Landis.Library.LeafBiomassCohorts
         public float LeafBiomass;
         //private uint leafBiomass;
         //---------------------------------------------------------------------
-/*
-        public float WoodBiomass
-        {
-            get {
-                return ((float) woodBiomass) / 1000F;
-            }
-            set {
-                woodBiomass = (uint) (value * 1000F);
-            }
-        }
 
+        /// <summary>
+        /// The cohort's established location
+        /// </summary>
+        public string EstablishedLoc;
         //---------------------------------------------------------------------
+        /*
+                public float WoodBiomass
+                {
+                    get {
+                        return ((float) woodBiomass) / 1000F;
+                    }
+                    set {
+                        woodBiomass = (uint) (value * 1000F);
+                    }
+                }
 
-        public float LeafBiomass
-        {
-            get {
-                return ((float) leafBiomass) / 1000F;
-            }
-            set {
-                leafBiomass = (uint) (value * 1000F);
-                //UI.WriteLine("leafB={0}, input={1}.", leafBiomass, value);
-            }
-        }
-        */
+                //---------------------------------------------------------------------
+
+                public float LeafBiomass
+                {
+                    get {
+                        return ((float) leafBiomass) / 1000F;
+                    }
+                    set {
+                        leafBiomass = (uint) (value * 1000F);
+                        //UI.WriteLine("leafB={0}, input={1}.", leafBiomass, value);
+                    }
+                }
+                */
         //---------------------------------------------------------------------
         /// <summary>
         /// Initializes a new instance.
@@ -62,13 +68,15 @@ namespace Landis.Library.LeafBiomassCohorts
         /// </param>
         public CohortData(ushort age,
                           float woodBiomass,
-                          float leafBiomass)
+                          float leafBiomass,
+                          string establishedLoc)
         {
             this.Age = age;
             //this.woodBiomass = 0;
             //this.leafBiomass = 0;
             this.WoodBiomass = woodBiomass;
             this.LeafBiomass = leafBiomass;
+            this.EstablishedLoc = establishedLoc;
         }
     }
 }

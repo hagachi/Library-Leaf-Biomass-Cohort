@@ -15,7 +15,7 @@ namespace Landis.Library.LeafBiomassCohorts
     {
         
         int ReduceOrKillBiomassCohorts(IDisturbance disturbance);
-        void AddNewCohort(ISpecies species, ushort age, float initialWood, float initialLeaf);
+        void AddNewCohort(ISpecies species, ushort age, float initialWood, float initialLeaf, string establishedLoc); // 2020.10.30 Chihiro
         void Grow(ActiveSite site, bool isSuccessionTimestep, bool annualTimestep);
         
     }

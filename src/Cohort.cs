@@ -52,6 +52,18 @@ namespace Landis.Library.LeafBiomassCohorts
                 return data.LeafBiomass;
             }
         }
+
+        //---------------------------------------------------------------------
+
+        // 2020.10.30 Chihiro
+        public string EstablishedLoc
+        {
+            get
+            {
+                return data.EstablishedLoc;
+            }
+        }
+
         // TEST ---------------------------------------------------------------------
 
         public int Biomass
@@ -82,12 +94,14 @@ namespace Landis.Library.LeafBiomassCohorts
         public Cohort(ISpecies species,
                       ushort   age,
                       float   woodBiomass,
-                      float   leafBiomass)
+                      float   leafBiomass,
+                      string  establishedLoc) // 2020.10.30 Chihiro
         {
             this.species = species;
             this.data.Age = age;
             this.data.WoodBiomass = woodBiomass;
             this.data.LeafBiomass = leafBiomass;
+            this.data.EstablishedLoc = establishedLoc; // 2020.10.30 Chihiro
         }
 
         //---------------------------------------------------------------------

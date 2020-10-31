@@ -1,12 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <RootNamespace>Landis.Library.LeafBiomassCohorts</RootNamespace>
-    <AssemblyName>Landis.Library.LeafBiomassCohorts-v2</AssemblyName>
-    <AssemblyTitle>Landis.Library.LeafBiomassCohorts-v2</AssemblyTitle>
+    <AssemblyName>Landis.Library.LeafBiomassCohorts-v2_ftestloc</AssemblyName>
+    <AssemblyTitle>Landis.Library.LeafBiomassCohorts-v2_ftestloc</AssemblyTitle>
     <AssemblyCompany>LANDIS-II Foundation</AssemblyCompany>
-    <AssemblyProduct>Landis.Library.LeafBiomassCohorts-v2</AssemblyProduct>
+    <AssemblyProduct>Landis.Library.LeafBiomassCohorts-v2_ftestloc</AssemblyProduct>
     <AssemblyCopyright>LANDIS-II Foundation</AssemblyCopyright>        
-    <AssemblyVersion>2.0</AssemblyVersion>
+    <AssemblyVersion>2.0.1</AssemblyVersion>
     <AssemblyDescription>Biomass Cohort Library for LANDIS-II</AssemblyDescription>
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
@@ -18,11 +18,11 @@
     <Authors>LANDIS-II Foundation</Authors>
     <Product>Leaf Biomass Cohort Library</Product>
     <Copyright>LANDIS-II Foundation</Copyright>
-    <Version>2.0</Version>
+    <Version>2.0.1</Version>
     <PackageTags>LANDIS-II;Landis;Library;Biomass;Cohort</PackageTags>
     <Description>Leaf Biomass Cohort Library for LANDIS-II</Description>
     <PackageReleaseNotes>.NET Standard 2.0 update.</PackageReleaseNotes>
-    <FileVersion>2.0</FileVersion>
+    <FileVersion>2.0.1</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>

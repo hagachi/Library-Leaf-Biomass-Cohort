@@ -278,7 +278,8 @@ namespace Landis.Library.LeafBiomassCohorts
         public void AddNewCohort(ISpecies species,
                                 ushort initial_age,
                                  float initialWoodBiomass,
-                                 float initialLeafBiomass)
+                                 float initialLeafBiomass,
+                                 string establishedLoc) // 2020.10.30 Chihiro
         {
             //if (isDebugEnabled)
             //    log.DebugFormat("  add cohort: {0}, initial biomass = {1}; site biomass = {2}",
@@ -288,14 +289,14 @@ namespace Landis.Library.LeafBiomassCohorts
             for (int i = 0; i < cohorts.Count; i++) {
                 SpeciesCohorts speciesCohorts = cohorts[i];
                 if (speciesCohorts.Species == species) {
-                    speciesCohorts.AddNewCohort(initial_age, initialWoodBiomass, initialLeafBiomass);
+                    speciesCohorts.AddNewCohort(initial_age, initialWoodBiomass, initialLeafBiomass, establishedLoc); // 2020.10.30 Chihiro
                     speciesPresent = true;
                     break;
                 }
             }
 
             if (! speciesPresent)
-                cohorts.Add(new SpeciesCohorts(species, initial_age, initialWoodBiomass, initialLeafBiomass));
+                cohorts.Add(new SpeciesCohorts(species, initial_age, initialWoodBiomass, initialLeafBiomass, establishedLoc)); // 2020.10.30 Chihiro
 
         }
         //---------------------------------------------------------------------

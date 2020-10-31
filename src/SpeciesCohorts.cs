@@ -108,12 +108,13 @@ namespace Landis.Library.LeafBiomassCohorts
         public SpeciesCohorts(ISpecies species,
                                 ushort initialAge,
                               float initialWoodBiomass,
-                              float initialLeafBiomass)
+                              float initialLeafBiomass,
+                              string establishedLoc) // 2020.10.30 Chihiro
         {
             this.species = species;
             this.cohortData = new List<CohortData>();
             this.isMaturePresent = false;
-            AddNewCohort(initialAge, initialWoodBiomass, initialLeafBiomass);
+            AddNewCohort(initialAge, initialWoodBiomass, initialLeafBiomass, establishedLoc); // 2020.10.30 Chihiro
         }
 
         //---------------------------------------------------------------------
@@ -147,9 +148,10 @@ namespace Landis.Library.LeafBiomassCohorts
         /// <summary>
         /// Adds a new cohort.
         /// </summary>
-        public void AddNewCohort(ushort age, float initialWoodBiomass, float initialLeafBiomass)
+        // 2020.10.30 Chihiro
+        public void AddNewCohort(ushort age, float initialWoodBiomass, float initialLeafBiomass, string establishedLoc)
         {
-            this.cohortData.Add(new CohortData(age, initialWoodBiomass, initialLeafBiomass));
+            this.cohortData.Add(new CohortData(age, initialWoodBiomass, initialLeafBiomass, establishedLoc));
         }
 
         //---------------------------------------------------------------------
@@ -188,6 +190,7 @@ namespace Landis.Library.LeafBiomassCohorts
             int youngCount = 0;
             float totalWoodBiomass = 0;
             float totalLeafBiomass = 0;
+            string establishedLoc = "surface";
 
             for (int i = cohortData.Count - 1; i >= 0; i--) {
                 CohortData data = cohortData[i];
@@ -195,6 +198,13 @@ namespace Landis.Library.LeafBiomassCohorts
                     youngCount++;
                     totalWoodBiomass += data.WoodBiomass;
                     totalLeafBiomass += data.LeafBiomass;
+                    // 2020.10.30 Chihiro
+                    // If any cohort established on nursery logs, 
+                    // established location of this combined young cohort is identified as nlog
+                    if (data.EstablishedLoc == "nlog")
+                    {
+                        establishedLoc = "nlog";
+                    }
                 }
                 else
                     break;
@@ -203,7 +213,8 @@ namespace Landis.Library.LeafBiomassCohorts
             if (youngCount > 0) {
                 cohortData.RemoveRange(cohortData.Count - youngCount, youngCount);
                 cohortData.Add(new CohortData((ushort) (Cohorts.SuccessionTimeStep - 1),
-                                              totalWoodBiomass, totalLeafBiomass));
+                                              totalWoodBiomass, totalLeafBiomass,
+                                              establishedLoc)); // 2020.10.30 Chihiro
             }
         }
 
